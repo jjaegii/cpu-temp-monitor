@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-monitor
+  labels:
+    app: cpu-monitor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cpu-monitor
+  template:
+    metadata:
+      labels:
+        app: cpu-monitor
+    spec:
+      containers:
+      - name: cpu-monitor
+        image: jjaegii/cpu-monitor:latest
+        env:
+        - name: SMTP_HOST
+          value: "smtp.example.com"
+        - name: SMTP_PORT
+          value: "587"
+        - name: SMTP_USER
+          value: "user@example.com"
+        - name: SMTP_PASS
+          value: "password"
+        - name: EMAIL_TO
+          value: "recipient@example.com"
+

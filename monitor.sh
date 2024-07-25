@@ -15,7 +15,7 @@ EOL
 while true; do
   temp=$(sensors | awk '/^Package id 0/ {print $4}' | sed 's/+//;s/°C//')
   if [ $(echo "$temp > 70" | bc) -eq 1 ]; then
-    echo -e "Subject: CPU Temperature Alert\n\nCPU temperature is above 70°C: $temp°C" | msmtp -a default $EMAIL_TO
+    echo -e "Subject: CPU Temperature Alert\n\nCPU temperature in $HOSTNAME is above 70°C: $temp°C" | msmtp -a default $EMAIL_TO
   fi
   sensors
   sleep 60
